@@ -11,7 +11,7 @@ const headerModalSearch = document.querySelector(".header__modal-search");
 document.addEventListener("click", (e) => {
   if (cityBtn.contains(e.target)) {
     headerModal.classList.toggle("show");
-  } else if (!headerModal.contains(e.target)) {
+  } else if (!headerModal.contains(e.target) && !e.target.classList.contains("header__way-delete")) {
     headerModal.classList.remove("show");
   }
 });
@@ -86,7 +86,7 @@ const renderWay = (city) => {
   let html = `
     <div class="header__way-item" data-id=${city.id}>
       <span>${city.name}</span>
-      <img class="header__way-delete" src="./images/close-white.svg" alt="delete" />
+      <img class="header__way-delete" src="./images/close-white.svg" alt="delete" onClick={deleteCityFromWay(${city.id})} />
     </div>
   `;
 
@@ -115,8 +115,32 @@ const addCityToWay = async (id) => {
   if(citiesWay.length > 0) {
     headerModalWay.classList.add("length");
   }
-
 };
+
+const deleteCityFromWay = async (id) => {
+  const deleteEl = citiesWay.find(city => {
+    return id.toString() === city.id.toString();
+  });
+
+  headerModalWay.innerHTML = "";
+
+  const index = citiesWay.indexOf(deleteEl);
+
+  citiesWay.splice(index, 1);
+
+  citiesWay.map(city => {
+    return renderWay(city);
+  });
+
+  if(citiesWay.length < 1) {
+    headerModalWay.classList.remove("length");
+  }
+}
+
+headerModalBtn.addEventListener("click", () => {
+  alert("Успешно!");
+  headerModal.classList.remove("show");
+});
 
 getCities();
 
