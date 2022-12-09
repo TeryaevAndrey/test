@@ -6,14 +6,15 @@ const headerSearchClear = document.querySelector(".header__search-clear");
 const headerModalContent = document.querySelector(".header__modal-content");
 const headerModalWay = document.querySelector(".header__modal-way");
 const headerModalBtn = document.querySelector(".header__modal-btn");
+const headerModalSearch = document.querySelector(".header__modal-search");
 
 document.addEventListener("click", (e) => {
-  if(cityBtn.contains(e.target)) {
+  if (cityBtn.contains(e.target)) {
     headerModal.classList.toggle("show");
   } else if (!headerModal.contains(e.target)) {
     headerModal.classList.remove("show");
   }
-})
+});
 
 searchField.addEventListener("focus", (e) => {
   search.style.backgroundColor = "#fff";
@@ -39,6 +40,8 @@ headerSearchClear.addEventListener("click", () => {
   headerSearchClear.style.display = "none";
 });
 
+const citiesWay = [];
+
 const getCities = async () => {
   const res = await fetch("https://studika.ru/api/areas", {
     method: "POST",
@@ -46,48 +49,74 @@ const getCities = async () => {
 
   const cities = await res.json();
 
-  console.log(cities);
+  cities.map(city => {
+    return renderCities(city);
+  })
 
-  cities.map((city) => {
-    headerModalContent.insertAdjacentHTML(
-      "beforeend",
-      `
-      <div class="header__modal-item" data-id=${city.id}>
-        ${city.name}
-      </div>
-    `
-    );
-  });
+  headerModalSearch.addEventListener("input", (e) => {
+    headerModalContent.innerHTML = "";
 
-  document.querySelectorAll(".header__modal-item").forEach((item) => {
-    item.addEventListener("click", (e) => {
-      const currentCity = cities.filter((item) => {
-        return item.id.toString() === e.target.dataset.id;
+    if(e.target.value.length > 0) {
+      const filterCities = cities.filter(city => {
+        return city.name.toLowerCase().includes(e.target.value.toLowerCase());
       });
 
-      headerModalWay.insertAdjacentHTML(
-        "beforeend",
-        `
-        <div class="header__way-item">
-          ${currentCity[0].name}
-          <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"/><path fill="#fff" d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"/></g></g></svg>
-        </div>
-       `
-      );
-
-      if (headerModalWay.hasChildNodes()) {
-        headerModalWay.classList.add("length");
-      }
-    });
+      filterCities.map(city => {
+        return renderCities(city);
+      })
+    } else {
+      cities.map(city => {
+        return renderCities(city);
+      })
+    }
   });
 };
 
-headerModalBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+const renderCities = (city) => {
+    let html = `
+      <div class="header__modal-item" data-id=${city.id} onclick="addCityToWay('${city.id}')">
+        ${city.name}
+      </div>
+  `;
 
-  alert("Успешно!");
-  headerModal.classList.remove("show");
-});
+  return headerModalContent.insertAdjacentHTML("beforeend", html);
+};
+
+const renderWay = (city) => {
+  let html = `
+    <div class="header__way-item" data-id=${city.id}>
+      <span>${city.name}</span>
+      <img class="header__way-delete" src="./images/close-white.svg" alt="delete" />
+    </div>
+  `;
+
+  return headerModalWay.insertAdjacentHTML("beforeend", html);
+}
+
+const addCityToWay = async (id) => {
+  const res = await fetch("https://studika.ru/api/areas", {
+    method: "POST",
+  });
+
+  const cities = await res.json();
+
+  const currentEl = await cities.find(city => {
+    return city.id.toString() === id.toString();
+  });
+
+  citiesWay.push(currentEl);
+
+  headerModalWay.innerHTML = "";
+
+  citiesWay.map(city => {
+    return renderWay(city);
+  });
+
+  if(citiesWay.length > 0) {
+    headerModalWay.classList.add("length");
+  }
+
+};
 
 getCities();
 

@@ -254,3 +254,7 @@ button {
   align-items: center;
   gap: 5px;
 }
+
+.header__way-delete {
+  cursor: pointer;
+}
