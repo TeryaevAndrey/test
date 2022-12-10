@@ -8,6 +8,7 @@ const headerModalContent = document.querySelector(".header__modal-content");
 const headerModalWay = document.querySelector(".header__modal-way");
 const headerModalBtn = document.querySelector(".header__modal-btn");
 const headerModalSearch = document.querySelector(".header__modal-search");
+const burgerBtn = document.querySelector(".header__burger");
 
 document.addEventListener("click", (e) => {
   if (cityBtn.contains(e.target)) {
@@ -168,28 +169,6 @@ const showSearchItems = async () => {
   cities.map((city) => {
     return renderSearchItem(city);
   });
-
-  // cities.forEach(city => {
-  //   searchField.addEventListener("input", (e) => {
-
-  //     headerSearchContent.innerHTML = "";
-
-  //     if (city.name.toLowerCase().includes(e.target.value.toLowerCase())) {
-  //       let index = city.name.trim().toLowerCase().indexOf(e.target.value.trim().toLowerCase());
-  //       let beforeLetters = city.name.slice(0, index);
-  //       let coincidence = city.name.slice(index, e.target.value.length);
-  //       let remains = city.name.slice(e.target.value.length, city.name.length);
-
-  //       headerSearchContent.classList.add("active");
-
-  //       renderSearchItem(beforeLetters, coincidence, remains);
-  //     }
-
-  //     if(e.target.value.length < 1) {
-  //       headerSearchContent.classList.remove("active");
-  //     }
-  //   });
-  // })
 };
 
 showSearchItems();
@@ -226,3 +205,8 @@ searchField.addEventListener("input", (e) => {
 const insertMark = (str, pos, len) => {
   return str.slice(0, pos) + "<strong>" + str.slice(pos, pos + len) + "</strong>" + str.slice(pos + len);
 }
+
+burgerBtn.addEventListener("click", () => {
+  document.querySelector(".menu__mob-wrapper").classList.toggle("active");
+  document.querySelector(".menu__mob").classList.toggle("active");
+});

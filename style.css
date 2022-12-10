@@ -32,6 +32,7 @@ button {
 }
 
 .header {
+  position: relative;
   padding-top: 32px;
   padding-bottom: 16px;
 }
@@ -149,7 +150,7 @@ button {
 .header__menu {
   display: flex;
   align-items: center;
-  gap: 30px;
+  flex-wrap: wrap;
   margin-top: 25px;
 }
 
@@ -158,6 +159,10 @@ button {
   background-color: transparent;
   border-radius: 35px;
   transition: all 0.2s ease;
+}
+
+.header__menu-item + .header__menu-item {
+  margin-left: 30px;
 }
 
 .header__menu-link {
@@ -287,4 +292,111 @@ button {
 
 .header__search-item:hover {
   background-color: #F1F1F1;
+}
+
+.header__burger {
+  display: none;
+  z-index: 1000;
+}
+
+.menu__mob-wrapper {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.menu__mob-wrapper.active {
+  opacity: 1;
+}
+
+@media(max-width: 1150px) {
+  .header__menu-item + .header__menu-item {
+    margin: 0;
+  }
+
+  .header__menu {
+    gap: 15px;
+  }
+  
+  .header__search {
+    margin-left: 20px;
+  }
+}
+
+@media(max-width: 768px) {
+  .header__city {
+    display: none;
+  }
+
+  .header__search {
+    display: none;
+  }
+
+  .header__profile {
+    display: none;
+  }
+
+  .header__burger {
+    display: block;
+  }
+
+  .header__like {
+    margin: 0;
+  }
+
+  .menu__mob-wrapper::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+
+  .menu__mob {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    height: 100vh;
+    width: 40%;
+    top: 0;
+    left: -100%;
+    z-index: 2;
+    transition: all 0.4s ease;
+  }
+
+  .menu__mob.active {
+    left: 0;
+  }
+
+  .menu__mob .header__city  {
+    display: flex;
+    padding-top: 90px;
+    margin: 0 auto;
+  }
+
+  .header__bottom { 
+    display: none;
+  }
+
+  .menu__mob .header__bottom {
+    display: flex;
+    margin-left: 10px
+  }
+
+  .menu__mob .header__menu {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .menu__mob .header__menu-item {
+    line-height: 20px;
+  }
 }

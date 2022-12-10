@@ -11,7 +11,75 @@
     <header class="header">
       <div class="container">
         <div class="header__inner">
+          <div class="menu__mob-wrapper">
+            <div class="menu__mob">
+              <div class="header__city">
+                <div class="header__city-btn">
+                  <img
+                    class="header__city-img"
+                    src="./images/city.svg"
+                    alt="city"
+                  />
+                  <p class="header__city-text">Москва</p>
+                </div>
+
+                <div class="header__modal">
+                  <input
+                    class="header__modal-search"
+                    type="text"
+                    placeholder="Регион, город, населенный пункт"
+                  />
+
+                  <div class="header__modal-way"></div>
+
+                  <div class="header__modal-content"></div>
+                  <button type="submit" class="header__modal-btn">
+                    Сохранить
+                  </button>
+                </div>
+              </div>
+              <div class="header__bottom">
+                <ul class="header__menu">
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Вузы </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Колледжи </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Техникумы </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Училища </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Специальности </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Профессии </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#">
+                      Дистанционное обучение
+                    </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Курсы </a>
+                  </li>
+                  <li class="header__menu-item">
+                    <a class="header__menu-link" href="#"> Отзывы </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <div class="header__top">
+            <img
+              class="header__burger"
+              src="./images/burger.svg"
+              alt="burger"
+            />
             <a class="header__logo" href="#">
               <img
                 class="header__logo-img"
@@ -21,25 +89,27 @@
             </a>
             <div class="header__city">
               <div class="header__city-btn">
-                  <img
+                <img
                   class="header__city-img"
                   src="./images/city.svg"
                   alt="city"
                 />
-                <p class="header__city-text"> Москва </p>
+                <p class="header__city-text">Москва</p>
               </div>
 
               <div class="header__modal">
-                <input class="header__modal-search" type="text" placeholder="Регион, город, населенный пункт">
+                <input
+                  class="header__modal-search"
+                  type="text"
+                  placeholder="Регион, город, населенный пункт"
+                />
 
-                <div class="header__modal-way">
+                <div class="header__modal-way"></div>
 
-                </div>
-
-                <div class="header__modal-content">
-
-                </div>
-                <button type="submit" class="header__modal-btn">Сохранить</button> 
+                <div class="header__modal-content"></div>
+                <button type="submit" class="header__modal-btn">
+                  Сохранить
+                </button>
               </div>
             </div>
             <div class="header__search">
@@ -53,7 +123,11 @@
                 type="text"
                 placeholder="Учебное заведение, специальность или профессия"
               />
-              <img class="header__search-clear" src="./images/close.svg" alt="close">
+              <img
+                class="header__search-clear"
+                src="./images/close.svg"
+                alt="close"
+              />
 
               <div class="header__search-content"></div>
             </div>
