@@ -258,3 +258,33 @@ button {
 .header__way-delete {
   cursor: pointer;
 }
+
+.header__search-content{ 
+  position: absolute;
+  display: none;
+  background-color: #fff;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  min-height: 100px;
+  max-height: 600px;
+  margin-top: 10px;
+  border-radius: 20px;
+  overflow-y: auto;
+}
+
+.header__search-content.active {
+  display: block;
+}
+
+.header__search-item {
+  font-size: 14px;
+  padding: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.header__search-item:hover {
+  background-color: #F1F1F1;
+}
