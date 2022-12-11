@@ -17,6 +17,7 @@ const burgerBtn = document.querySelector(".header__burger");
 document.addEventListener("click", (e) => {
   if (cityBtn.contains(e.target)) {
     headerModal.classList.toggle("show");
+    getCities();
   } else if (
     !headerModal.contains(e.target) &&
     !e.target.classList.contains("header__way-delete")
@@ -53,11 +54,15 @@ headerSearchClear.addEventListener("click", () => {
 const citiesWay = [];
 
 const getCities = async () => {
+  document.querySelector(".lds-dual-ring").style.display = "inline-block";
+
   const res = await fetch("https://studika.ru/api/areas", {
     method: "POST",
   });
 
   const cities = await res.json();
+
+  document.querySelector(".lds-dual-ring").style.display = "none";
 
   cities.map((city) => {
     return renderCities(city);
@@ -151,8 +156,6 @@ headerModalBtn.addEventListener("click", () => {
   alert("Успешно!");
   headerModal.classList.remove("show");
 });
-
-getCities();
 
 const renderSearchItem = (city) => {
   let html = `
