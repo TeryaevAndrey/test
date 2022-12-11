@@ -1,3 +1,7 @@
+if(window.screen.width > 768) {
+  document.querySelector(".menu__mob-wrapper").remove();
+}
+
 const cityBtn = document.querySelector(".header__city-btn");
 const headerModal = document.querySelector(".header__modal");
 const search = document.querySelector(".header__search");
@@ -43,6 +47,7 @@ headerSearchClear.addEventListener("click", () => {
   searchField.value = "";
   searchField.focus();
   headerSearchClear.style.display = "none";
+  headerSearchContent.classList.remove("active")
 });
 
 const citiesWay = [];
@@ -200,6 +205,12 @@ searchField.addEventListener("input", (e) => {
       item.innerHTML = item.innerText;
     });
   }
+
+  document.querySelectorAll(".header__search-item").forEach(item => {
+    item.addEventListener("click", (e) => {
+      searchField.value = e.target.textContent;
+    })
+  })
 });
 
 const insertMark = (str, pos, len) => {
